@@ -27,7 +27,7 @@ class BudgetApp:
 
         tk.Label(frame, text="Description: ").grid(row=1, column=0, padx=5, pady=5)
         self.description_entry = tk.Entry(frame)  
- self.description_entry.grid(row=1, column=1, padx=5, pady=5)
+        self.description_entry.grid(row=1, column=1, padx=5, pady=5)
 
         tk.Label(frame, text="Type: ").grid(row=2, column=0, padx=5, pady=5)
         self.variable = tk.StringVar()
