@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 import matplotlib.pyplot as mat
-from buget import Budget  # Import the correct Budget class
+from buget import Budget  
 
 class BudgetApp:
     def __init__(self, main):
@@ -26,8 +26,8 @@ class BudgetApp:
         self.sum_entry.grid(row=0, column=1, padx=5, pady=5)
 
         tk.Label(frame, text="Description: ").grid(row=1, column=0, padx=5, pady=5)
-        self.description_entry = tk.Entry(frame)  # Renamed to description
-        self.description_entry.grid(row=1, column=1, padx=5, pady=5)
+        self.description_entry = tk.Entry(frame)  
+ self.description_entry.grid(row=1, column=1, padx=5, pady=5)
 
         tk.Label(frame, text="Type: ").grid(row=2, column=0, padx=5, pady=5)
         self.variable = tk.StringVar()
@@ -50,19 +50,19 @@ class BudgetApp:
         try:
             amount = float(self.sum_entry.get())
             description = self.description_entry.get().strip()
-            var_type = self.variable.get().lower()  # Convert type to lowercase to match Budget class
+            var_type = self.variable.get().lower()  
 
             if not description:
                 raise ValueError("The description cannot be empty.")
             if var_type not in ["income", "expense"]:
                 raise ValueError("Invalid transaction type selected.")
             
-            # Add transaction to the tracker
+            
             success = self.tracker.add_transaction(var_type, amount, description)
             if not success:
                 raise ValueError("Failed to add transaction. Please check the input values.")
 
-            # Clear input fields and update the summary
+            
             self.sum_entry.delete(0, tk.END)
             self.description_entry.delete(0, tk.END)
             self.update()
@@ -85,7 +85,6 @@ class BudgetApp:
         balance = self.tracker.available_budget()
         transactions = self.tracker.get_transactions()
 
-        # Group expenses by description
         category_summary = {}
         for transaction in transactions:
             if transaction["type"] == "expense":
@@ -101,13 +100,12 @@ class BudgetApp:
 
         fig, axes = mat.subplots(1, 2, figsize=(12, 5))
 
-        # Pie chart for expenses by description
+        
         categories = list(category_summary.keys())
         amounts = list(category_summary.values())
         axes[0].pie(amounts, labels=categories, autopct='%1.1f%%', startangle=140)
         axes[0].set_title("Expenses by Description")
 
-        # Bar chart for income, expenses, and balance
         axes[1].bar(["Income", "Expenses", "Balance"], [income, expenses, balance],
                     color=["#3eeb43", "#fa2834", "#1683ca"])
         axes[1].set_title("Financial Overview")
